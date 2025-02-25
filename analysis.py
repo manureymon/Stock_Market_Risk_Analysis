@@ -124,22 +124,3 @@ class MertonModel:
         # Calcular la probabilidad de incumplimiento (PD)
         PD = 1 - norm.cdf(DD)
         return PD
-
-# Ejemplo de uso
-if __name__ == '__main__':
-    ticker = 'AAPL'
-    risk_free_rate = 0.05  # Tasa libre de riesgo del 5%
-    T = 1.0  # Horizonte temporal de 1 año
-
-    merton = MertonModel(ticker, risk_free_rate, T)
-    DD = merton.distance_to_default()
-    PD = merton.probability_of_default()
-
-    print(f"Distance to Default (DD): {DD}")
-    print(f"Probability of Default (PD): {PD}")
-
-# Ejemplo de uso
-#if __name__ == '__main__':
-    #tickers = ['AAPL', 'F', 'MSFT', 'GOOGL']  # Lista de tickers
-    #z = ZScore(tickers)
-    #print('Z-Scores:', z.results)
