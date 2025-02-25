@@ -4,7 +4,7 @@ from scipy.stats import norm
 
 class ZScore:
     def __init__(self, ticker: str):
-        self.ticker = ticker.upper()
+        self.ticker = ticker
         self.data = self.get_data()
 
     def get_data(self):

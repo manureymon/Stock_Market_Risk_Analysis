@@ -21,8 +21,8 @@ T = st.number_input("Enter the time horizon (T) in years (e.g., 1.0):", value=1.
 # Button to perform analysis
 if st.button("Analyze"):
     # Calculate Z-Score
-    z_score_calculator = ZScore([ticker])
-    z_score = z_score_calculator.results[ticker]
+    z_score_calculator = ZScore(ticker)
+    z_score = z_score_calculator.calculate_z_score()
 
     # Calculate Merton Model (Probability of Default and Distance to Default)
     merton_model = MertonModel(ticker, risk_free_rate, T)
@@ -37,7 +37,7 @@ if st.button("Analyze"):
 
     # Decision logic
     if z_score > 3 and PD < 0.35:
-        st.success("Go ahead, give them all your life! They will pay you ;)")
+        st.success("Go ahead, give them all your money! They will pay you ;)")
     else:
         st.error("Caution! Don't give them money!")
 
