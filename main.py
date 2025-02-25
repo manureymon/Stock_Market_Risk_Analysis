@@ -63,10 +63,6 @@ if st.button("Analyze"):
     plt.legend()
     st.pyplot(plt)
 
-    # Price table
-    st.write("### Price Table (Last Year)")
-    st.dataframe(historical_prices)
-
     # Annual return
     st.write("### Annual Return")
     returns = historical_prices.pct_change().dropna()
