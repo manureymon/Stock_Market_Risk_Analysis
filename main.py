@@ -41,6 +41,91 @@ if st.button("Analyze"):
     else:
         st.error("Caution! Don't give them money!")
 
+    # Explanation of Z-Score components
+    st.subheader("Z-Score Components")
+    st.write("""
+    The Z-Score is calculated using the following formula en componentes:
+    """)
+
+    st.latex(r"""
+        ZScore = (0.717 x_1)+ (0.847 x_2) + (3.107 x_3) + (0.42 x_4) + (0.998 x_5)
+        """)
+
+    # Calculate and display each component
+    if z_score_calculator.data:
+        x1 = z_score_calculator.data['working_capital'] / z_score_calculator.data['total_assets']
+        x2 = z_score_calculator.data['retained_earnings'] / z_score_calculator.data['total_assets']
+        x3 = z_score_calculator.data['ebit'] / z_score_calculator.data['total_assets']
+        x4 = z_score_calculator.data['market_value_equity'] / z_score_calculator.data['total_liabilities']
+        x5 = z_score_calculator.data['sales'] / z_score_calculator.data['total_assets']
+
+        st.write("""
+        - **X1**: Measures the company's liquidity.
+          - Formula: Working Capital / Total Assets
+          - Value: {:.2f}
+        """.format(x1))
+
+        st.write("""
+        - **X2**: Measures the company's profitability.
+          - Formula: Retained Earnings / Total Assets
+          - Value: {:.2f}
+        """.format(x2))
+
+        st.write("""
+        - **X3**: Measures the company's operating efficiency.
+          - Formula: EBIT / Total Assets
+          - Value: {:.2f}
+        """.format(x3))
+
+        st.write("""
+        - **X4**: Measures the company's leverage.
+          - Formula: Market Value of Equity / Total Liabilities
+          - Value: {:.2f}
+        """.format(x4))
+
+        st.write("""
+        - **X5**: Measures the company's asset turnover.
+          - Formula: Sales / Total Assets
+          - Value: {:.2f}
+        """.format(x5))
+
+    st.subheader("Distance to Default and Probability of Default")
+    st.write("""
+    The **Distance to Default (DD)** and **Probability of Default (PD)** are calculated using the Merton Model. 
+    Here are the formulas:
+    """)
+
+    st.write("""
+    ### Distance to Default (DD)
+    The Distance to Default measures how far a company is from defaulting on its debt. It is calculated as:
+    """)
+    st.latex(r"""
+    DD = \frac{\ln(V / D) + (r + \sigma^2 / 2) \cdot T}{\sigma \cdot \sqrt{T}}
+    """)
+    st.write("""
+    Where:
+    - **V**: Market value of the company's assets.
+    - **D**: Market value of the company's debt.
+    - **r**: Risk-free interest rate.
+    - **σ**: Volatility of the company's asset value.
+    - **T**: Time horizon for the loan.
+    """)
+
+    st.write("""
+    ### Probability of Default (PD)
+    The Probability of Default estimates the likelihood that the company will default on its debt. It is calculated as:
+    """)
+    st.latex(r"""
+    PD = 1 - N(DD)
+    """)
+    st.write("""
+    Where:
+    - **N**: Cumulative standard normal distribution.
+    - **DD**: Distance to Default.
+    """)
+
+    st.subheader("Model Parameters")
+
     # Explanation of parameters
     st.write("""
     This model uses the following parameters to make a decision:
